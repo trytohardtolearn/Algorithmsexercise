@@ -36,6 +36,10 @@ class Person1:
 		print("Name=%s,Age=%s"%(self.name,self.age))
 pl1=Person1("Wanghuineng",26,171)
 print(pl1)
+
+
+
+
 # the Gambel Game
 import random
 class Game:
@@ -93,3 +97,68 @@ for i in range(1,6):
 		print("nobody wins")
 	else:
 		print("wang wins")
+
+
+
+class User:
+
+	def __init__(self,passwort_length):
+		if len(passwort_length)>=6:
+			self.passwort=passwort_length
+		else:
+			print("you have inputed the wrong length of passwort")
+	def __str__(self):
+		return " passwort=%s "%self.passwort
+	def get_password(self):
+		return self.passwort
+
+u1=User("1231231231")
+print(u1.get_password())
+
+
+class User2:
+	def __init__(self):
+		print("the object will be created")
+	def __del__(self):
+		print("the object will be deleted")
+
+u1=User2()
+u2=u1
+del u1
+print("=="*30)
+del u2
+print("``"*30)
+
+
+class Animal:
+	def eat(self):
+		print("eat something")
+	def sleep(self):
+		print("sleep")
+
+class Dog(Animal):
+	def shout(self):
+		print("dog shout")
+class Cat(Animal):
+	def catchRat(self):	
+		print("catch rat")
+m1=Dog()
+m1.eat()
+
+
+class A:
+	def Test(self):
+		print("A----test()")
+class B:
+	def Test(self):
+		print("B---test()")
+class C1(A,B):
+	def test1(self):
+		print("C---test()")
+class C2(B,A):
+	def test2(self):
+		print("C2--test()")
+c=C2()
+c.Test()
+m=C1()
+m.Test()
