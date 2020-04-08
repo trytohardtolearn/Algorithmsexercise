@@ -142,7 +142,7 @@ w2=Wang2("wanghuineng")
 print(w1==w2)
 print(id(w1),id(w2))
 
-
+#单例模式1
 class Wang3(object):
 	__instance=None
 	def __init__(self,name):
@@ -156,6 +156,90 @@ w3=Wang3.get_instance("wanghuineng")
 w4=Wang3.get_instance("buzhidao")
 print(w3==w4)
 print(id(w3),id(w4))
+print(w3)
+#这里只调用了get这个方法
+
+#单例模式2
+class Wang4(object):
+	__instance=None
+	def __init__(self,name):
+		self.name=name
+	def __new__(cls,name):
+		if not cls.__instance:
+			cls.__instance=object.__new__(cls)
+		return cls.__instance
+w5=Wang4("wanghuineng")
+w6=Wang4("roubao")
+print(w5==w6)
+print(w5.name)
+print(w6.name)
+#NEW 方法结束之后，还会继续调用init方法
+
+#设计模式 工厂模式 提高系统的维护性和拓展性
+#解决代码的强依赖性的问题
+#简单工厂类
+class Person(object):
+	def __init__(self,name):
+		self.name=name
+	def work(self,axe_type):
+
+		print(self.name+"start to work")
+		axe=Factory.creat_axe(axe_type)
+		axe.cut_tree()
+class Axe(object):
+	def __init__(self,name):
+		self.name=name
+	def cut_tree(self):
+		print("%s  use the axe to start to cut tree"%self.name)
+class StoneAxe(Axe):
+	def cut_tree(self):
+		print("use the StoneAxe to cut down the tree")
+class SteelAxe(Axe):
+	def cut_tree(self):
+		print("use the SteelAxe to cut down the tree")
+class Factory(object):
+	@staticmethod
+	def creat_axe(type):
+		if type=="stone":
+			return StoneAxe("StoneAxe")
+		elif type=="steel":
+			return SteelAxe("SteelAxe")
+		else:
+			print("the choice is not existed")
+p=Person("wanghuineng")
+p.work("stone")
 
 
+#工厂模式 就不是简单的选择，而是说同时有很多个工厂
+class Person(object):
+	def __init__(self,name):
+		self.name=name
+	def work(self):
+
+		print(self.name+"start to work")
+		axe=Stone_Axe_Factory().creat_axe()
+		axe.cut_tree()
+class Axe(object):
+	def __init__(self,name):
+		self.name=name
+	def cut_tree(self):
+		print("%s  use the axe to start to cut tree"%self.name)
+class StoneAxe(Axe):
+	def cut_tree(self):
+		print("use the StoneAxe to cut down the tree")
+class SteelAxe(Axe):
+	def cut_tree(self):
+		print("use the SteelAxe to cut down the tree")
+class Factory(object):
+	def creat_axe(self):
+		pass
+class Stone_Axe_Factory(Factory):
+	def creat_axe(self):
+		return StoneAxe("StoneAxe")
+class Steel_Axe_Factory(Factory):
+	def creat_axe(self):
+		return SteelAxe("SteelAxe")
+p=Person("wanghuineng")
+p.work()
+ 
 
