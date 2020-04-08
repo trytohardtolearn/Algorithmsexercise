@@ -162,3 +162,26 @@ c=C2()
 c.Test()
 m=C1()
 m.Test()
+
+
+#How to deal with the Error
+try:
+	print(a)
+	i=1/0
+except (NameError,ZeroDivisionError) as ex:#ex 代表你刚刚捕获的异常
+	print("Exist a Error")#捕获完一种异常之后不会回头再继续执行之前的代码
+	print(ex)
+print("world") # 捕获异常之后，程序可以继续往下面跑
+
+
+a="123"
+f=open("text.txt","w")
+try:
+    f.write("hello\n")
+    f.write("world %d"%a)
+except Exception as ex:
+	print(ex)
+finally:#不管前面代码有没有出错，最终要执行的代码
+	f.close()
+
+	
